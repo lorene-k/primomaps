@@ -36,7 +36,7 @@ def load_csv(file_path: str):
 
 async def csv_to_db():
 	db_url = os.getenv("SUPABASE_URL")
-	records = load_csv("../data/92.csv")
+	records = load_csv("data/92.csv")
 	conn = await asyncpg.connect(db_url)
 	try:
 		async with conn.transaction():
