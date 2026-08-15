@@ -1,0 +1,24 @@
+.DS_Store
+notes.txt
+
+# Backend
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Frontend
+node_modules/
+dist/
+*.local
+
+# Databse
+supabase/.temp/
+
+# Data
+data/*.csv
+data/*.csv.gz
+data/*.geojson
+
+# Éditeurs
+.vscode/
