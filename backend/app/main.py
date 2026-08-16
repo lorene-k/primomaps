@@ -29,6 +29,6 @@ def root():
 
 
 @app.get('/communes', response_model=list[PrixCommune])
-async def communes(type_bien: str | None = None):
-    rows = await get_prix_communes(type_bien)
+async def communes(type: str | None = None):
+    rows = await get_prix_communes(type)
     return rows
