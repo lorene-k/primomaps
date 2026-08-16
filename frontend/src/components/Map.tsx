@@ -21,25 +21,40 @@ function getPrixCommunes(prixData: any) {
     return prixCommunes
 }
 
-function styleCommune(feature: any, prixCommunes: Record<string, number>) {
+function setAreaStyle(feature: any, prixCommunes: Record<string, number>, selectedArea: any) {
     const code = feature.properties.code
     const prix = prixCommunes[code]
+    const isSelected = selectedArea && selectedArea.code === code
     return {
         fillColor: getColor(prix),
-        fillOpacity: 0.7,
+        fillOpacity: selectedArea ? (isSelected ? 0.9 : 0.5) : 0.7,
         color: 'white',
         weight: 1,
     }
 }
 
-export function Map() {
-    const { data: geoData, loading, error } = useFetch<GeoJSON.FeatureCollection>('/communes-92.geojson')
-    const { data: prixData, loading: prixLoading, error: prixError } = useFetch<any>('http://localhost:8000/communes')
-
-    if (loading || prixLoading) return <div>Chargement de la carte...</div>
-    if (error || prixError) return <div>Erreur : {error || prixError}</div>
+export function Map({ onAreaClick, selectedArea, typeFilter, prixData, geoData }: {
+    onAreaClick: (area: any) => void;
+    selectedArea: any;
+    typeFilter: string | null;
+    prixData: any;
+    geoData: GeoJSON.FeatureCollection | null;
+}) {
 
     const prixCommunes = getPrixCommunes(prixData)
+
+    function onEachArea(feature: any, layer: any) {
+        layer.on({
+            click: () => {
+                const code = feature.properties.code
+                const nom = feature.properties.nom
+                const prix = prixCommunes[code]
+                onAreaClick({ code, nom, prix })
+            },
+            mouseover: () => layer.setStyle({ weight: 3, color: '#fff' }),
+            mouseout: () => layer.setStyle({ weight: 1 }),
+        })
+    }
 
     return (
         <MapContainer
@@ -55,8 +70,11 @@ export function Map() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {geoData && <GeoJSON
-                key={prixData ? 'loaded' : 'loading'}
-                data={geoData} style={(feature) => styleCommune(feature, prixCommunes)} />}
+                key={`${typeFilter ?? 'all'}-${selectedArea ? selectedArea.code : 'none'}`}
+                data={geoData}
+                style={(feature) => setAreaStyle(feature, prixCommunes, selectedArea)}
+                onEachFeature={onEachArea}
+            />}
         </MapContainer>
     )
 }
