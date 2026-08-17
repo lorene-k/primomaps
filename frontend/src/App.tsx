@@ -11,7 +11,10 @@ function App() {
 
                 <MapView />
 
-                <footer className="shrink-0 min-h-10">...</footer>
+                <footer className="shrink-0 flex justify-between text-xs mt-5 text-slate-600">
+                    <span>Données DVF Etalab</span>
+                    <span>Site réalisé par <a href="https://github.com/lorene-k" className="underline">lorene-k</a></span>
+                </footer>
             </div>
         </div>
     )

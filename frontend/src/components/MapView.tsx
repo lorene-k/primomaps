@@ -14,7 +14,7 @@ export function MapView() {
     const { data: prixData, loading: prixLoading, error: prixError } = useFetch<any>(queryUrl)
     const { data: geoData, loading: geoLoading, error: geoError } = useFetch<GeoJSON.FeatureCollection>('/communes-92.geojson')
 
-    if (geoLoading || prixLoading) return <div>Chargement...</div>
+    // if (geoLoading || prixLoading) return <div>Chargement...</div>
     if (geoError || prixError) return <div>Erreur : {geoError || prixError}</div>
 
     return (
@@ -25,6 +25,8 @@ export function MapView() {
                     prixData={prixData}
                     onFilterChange={setTypeFilter}
                     typeFilterValue={typeFilter}
+                    geoLoading={geoLoading}
+                    prixLoading={prixLoading}
                 />
             </aside>
 

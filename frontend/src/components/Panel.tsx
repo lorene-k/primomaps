@@ -1,18 +1,25 @@
+import { LoaderCircle } from 'lucide-react'
 import { Filter } from './Filter'
 
-export function Panel({ area, onFilterChange, prixData, typeFilterValue }: {
+export function Panel({ area, onFilterChange, prixData, typeFilterValue, geoLoading, prixLoading }: {
     area: any;
     onFilterChange: (type: string | null) => void;
     prixData: any;
     typeFilterValue: string | null;
+    geoLoading: boolean;
+    prixLoading: boolean;
 }) {
     const infoArea = area ? prixData?.find((item: any) => item.code_commune === area.code) : null
 
     return (
         <div>
             <Filter onFilterChange={onFilterChange} value={typeFilterValue} />
-            {!infoArea ? (
-                <p className="text-slate-400 flex flex-col justify-center">
+            {(prixLoading || geoLoading) ? (
+                <div className="mt-10 flex justify-center">
+                    <LoaderCircle className="animate-spin text-slate-400" />
+                </div>
+            ) : !infoArea ? (
+                <p className="text-slate-400 flex flex-col mt-10">
                     Cliquez sur une commune pour voir les infos →
                 </p>
             ) : (

@@ -24,13 +24,13 @@ export function Filter({ onFilterChange, value }: {
             <SelectTrigger className="w-full p-4 rounded-md h-full border border-slate-400">
                 <SelectValue placeholder="Type de bien" />
             </SelectTrigger>
-            <SelectContent className="bg-slate-200">
+            <SelectContent alignItemWithTrigger={false} className="bg-slate-200/20 backdrop-blur-md text-slate-100 ">
                 <SelectGroup>
                     {items.map((item) => (
                         <SelectItem
                             key={item.value}
                             value={item.value}
-                            className="focus:bg-slate-300 focus:text-slate-900"
+                            className="focus:text-slate-100 focus:bg-slate-200/20 transition-colors duration-200"
                         >
                             {item.label}
                         </SelectItem>
