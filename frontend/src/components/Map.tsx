@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
-import { useFetch } from '../hooks/useFetch'
+import { ZoomToArea } from './ZoomToArea.tsx'
 
 function getColor(prix: number | undefined): string {
     if (prix === undefined) return '#cccccc'  // gris = pas de données
@@ -29,7 +29,7 @@ function setAreaStyle(feature: any, prixCommunes: Record<string, number>, select
         fillColor: getColor(prix),
         fillOpacity: selectedArea ? (isSelected ? 0.9 : 0.5) : 0.7,
         color: 'white',
-        weight: 1,
+        weight: isSelected ? 3 : 1,
     }
 }
 
@@ -69,12 +69,15 @@ export function Map({ onAreaClick, selectedArea, typeFilter, prixData, geoData }
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+
             {geoData && <GeoJSON
                 key={`${typeFilter ?? 'all'}-${selectedArea ? selectedArea.code : 'none'}`}
                 data={geoData}
                 style={(feature) => setAreaStyle(feature, prixCommunes, selectedArea)}
                 onEachFeature={onEachArea}
             />}
+
+            <ZoomToArea selectedArea={selectedArea} geoData={geoData} />
         </MapContainer>
     )
 }

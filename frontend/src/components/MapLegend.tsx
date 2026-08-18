@@ -9,7 +9,6 @@ const PRICE_COLORS = {
 export function MapLegend() {
     return (
         <div className="bottom-4 rounded shadow">
-            <h3 className="text-sm font-semibold mb-1">Légende</h3>
             <div className="flex flex-row lg:flex-row gap-4">
                 {Object.entries(PRICE_COLORS).map(([range, color]) => (
                     <div key={range} className="flex items-center gap-2">
