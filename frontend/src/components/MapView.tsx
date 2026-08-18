@@ -8,9 +8,10 @@ export function MapView() {
     const [selectedArea, setSelectedArea] = useState<any>(null)
     const [typeFilter, setTypeFilter] = useState<string | null>(null)
 
+    const url = import.meta.env.VITE_API_URL
     const queryUrl = typeFilter
-        ? `http://localhost:8000/communes?type=${typeFilter}`
-        : 'http://localhost:8000/communes'
+        ? `${url}/communes?type=${typeFilter}`
+        : `${url}/communes`
     const { data: prixData, loading: prixLoading, error: prixError } = useFetch<any>(queryUrl)
     const { data: geoData, loading: geoLoading, error: geoError } = useFetch<GeoJSON.FeatureCollection>('/communes-92.geojson')
 
