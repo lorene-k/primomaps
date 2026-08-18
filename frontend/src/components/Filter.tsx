@@ -20,7 +20,7 @@ export function Filter({ onFilterChange, value }: {
 
         <Select
             value={value ?? "Tout"}
-            onValueChange={(v: string) => onFilterChange(v === "Tout" ? null : v)}>
+            onValueChange={(v: string | null) => onFilterChange(v === "Tout" ? null : v)}>
             <SelectTrigger className="w-full p-4 rounded-md h-full border border-slate-400">
                 <SelectValue placeholder="Type de bien" />
             </SelectTrigger>
