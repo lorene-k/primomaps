@@ -5,7 +5,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "./ui/select"
 
 const items = [
     { label: "Tout", value: "Tout" },
