@@ -4,6 +4,11 @@ from app.database import init_db, close_db
 from app.queries import get_prix_communes
 from app.models import PrixCommune
 from fastapi.middleware.cors import CORSMiddleware
+import os
+
+
+origins = os.getenv("CORS_ORIGIN")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -17,7 +22,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[origins],
     allow_methods=["*"],
     allow_headers=["*"],
 )
