@@ -17,6 +17,10 @@ data/*.geojson
 __pycache__/
 *.pyc
 .venv/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
 
 # Frontend
 # Logs
