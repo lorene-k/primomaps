@@ -18,8 +18,8 @@ async def init_db():
     if db_url is None:
         raise RuntimeError("SUPABASE_URL manquant dans le .env")
     _pool = await asyncpg.create_pool(dsn=db_url)
-    
-    
+
+
 async def close_db():
     if _pool:
         await _pool.close()

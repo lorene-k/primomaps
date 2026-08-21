@@ -33,12 +33,13 @@ app.add_middleware(
 # def root():
 #     return {"message": "Hello from backend!"}
 
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
 
-@app.get('/communes', response_model=list[PrixCommune])
+@app.get("/communes", response_model=list[PrixCommune])
 async def communes(type: str | None = None):
     rows = await get_prix_communes(type)
     return rows
