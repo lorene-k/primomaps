@@ -31,9 +31,9 @@ app.add_middleware(
 )
 
 
-# @app.get('/')
-# def root():
-#     return {"message": "Hello from backend!"}
+@app.get('/')
+def root():
+    return {"message": "Hello from backend!"}
 
 
 @app.get("/health")
