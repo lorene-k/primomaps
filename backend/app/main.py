@@ -9,6 +9,8 @@ from app.models import PrixCommune
 from app.queries import get_prix_communes
 
 origins = os.getenv("CORS_ORIGIN")
+if origins is None:
+    raise RuntimeError("CORS_ORIGIN environment variable is required")
 
 
 @asynccontextmanager
