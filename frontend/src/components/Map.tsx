@@ -1,6 +1,10 @@
 import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import { ZoomToArea } from './ZoomToArea.tsx'
+import type { FeatureCollection, Feature } from 'geojson'
+import type { Area } from '../types.ts'
+import type { PrixData } from '../types.ts'
 
 function getColor(prix: number | undefined): string {
     if (prix === undefined) return '#cccccc'  // gris = pas de données
@@ -11,7 +15,7 @@ function getColor(prix: number | undefined): string {
     return '#FD8D3C'
 }
 
-function getPrixCommunes(prixData: any) {
+function getPrixCommunes(prixData: PrixData[] | null): Record<string, number> {
     const prixCommunes: Record<string, number> = {}
     if (prixData) {
         for (const row of prixData) {
@@ -21,8 +25,8 @@ function getPrixCommunes(prixData: any) {
     return prixCommunes
 }
 
-function setAreaStyle(feature: any, prixCommunes: Record<string, number>, selectedArea: any) {
-    const code = feature.properties.code
+function setAreaStyle(feature: Feature | undefined, prixCommunes: Record<string, number>, selectedArea: Area | null) {
+    const code = feature?.properties?.code
     const prix = prixCommunes[code]
     const isSelected = selectedArea && selectedArea.code === code
     return {
@@ -34,25 +38,25 @@ function setAreaStyle(feature: any, prixCommunes: Record<string, number>, select
 }
 
 export function Map({ onAreaClick, selectedArea, typeFilter, prixData, geoData }: {
-    onAreaClick: (area: any) => void;
-    selectedArea: any;
+    onAreaClick: (area: Area) => void;
+    selectedArea: Area | null;
     typeFilter: string | null;
-    prixData: any;
-    geoData: GeoJSON.FeatureCollection | null;
+    prixData: PrixData[] | null;
+    geoData: FeatureCollection | null;
 }) {
 
     const prixCommunes = getPrixCommunes(prixData)
 
-    function onEachArea(feature: any, layer: any) {
+    function onEachArea(feature: Feature, layer: L.Layer) {
         layer.on({
             click: () => {
-                const code = feature.properties.code
-                const nom = feature.properties.nom
+                const code = feature.properties?.code
+                const nom = feature.properties?.nom
                 const prix = prixCommunes[code]
                 onAreaClick({ code, nom, prix })
             },
-            mouseover: () => layer.setStyle({ weight: 3, color: '#fff' }),
-            mouseout: () => layer.setStyle({ weight: 1 }),
+            mouseover: () => (layer as L.Path).setStyle({ weight: 3, color: '#fff' }),
+            mouseout: () => (layer as L.Path).setStyle({ weight: 1 }),
         })
     }
 

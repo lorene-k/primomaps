@@ -1,17 +1,19 @@
+import L from 'leaflet'
 import { useMap } from 'react-leaflet'
 import { useEffect } from 'react'
-import L from 'leaflet'
+import type { Area } from '../types'
+import type { FeatureCollection, Feature } from 'geojson';
 
 export function ZoomToArea({ selectedArea, geoData }: {
-    selectedArea: any;
-    geoData: any;
+    selectedArea: Area | null;
+    geoData: FeatureCollection | null;
 }) {
     const map = useMap()
 
     useEffect(() => {
         if (!selectedArea || !geoData) return
         const feature = geoData.features.find(
-            (f: any) => f.properties.code === selectedArea.code)
+            (f: Feature) => f.properties?.code === selectedArea.code)
         if (feature) {
             const layer = L.geoJSON(feature)
             // map.invalidateSize()

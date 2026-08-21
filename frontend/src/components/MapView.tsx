@@ -1,21 +1,22 @@
 import { useState } from 'react'
+import type { FeatureCollection } from 'geojson'
 import { Map } from './Map.tsx'
 import { Panel } from './Panel.tsx'
 import { useFetch } from '../hooks/useFetch.ts'
 import { MapLegend } from './MapLegend.tsx'
+import type { Area, PrixData } from '../types.ts'
 
 export function MapView() {
-    const [selectedArea, setSelectedArea] = useState<any>(null)
+    const [selectedArea, setSelectedArea] = useState<Area | null>(null)
     const [typeFilter, setTypeFilter] = useState<string | null>(null)
 
     const url = import.meta.env.VITE_API_URL
     const queryUrl = typeFilter
         ? `${url}communes?type=${typeFilter}`
         : `${url}communes`
-    const { data: prixData, loading: prixLoading, error: prixError } = useFetch<any>(queryUrl)
-    const { data: geoData, loading: geoLoading, error: geoError } = useFetch<GeoJSON.FeatureCollection>('/communes-92.geojson')
+    const { data: prixData, loading: prixLoading, error: prixError } = useFetch<PrixData[] | null>(queryUrl)
+    const { data: geoData, loading: geoLoading, error: geoError } = useFetch<FeatureCollection>('/communes-92.geojson')
 
-    // if (geoLoading || prixLoading) return <div>Chargement...</div>
     if (geoError || prixError) return <div>Erreur : {geoError || prixError}</div>
 
     return (
