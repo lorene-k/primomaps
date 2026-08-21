@@ -21,6 +21,6 @@ jobs:
           python-version: 3.12
       - run: uv sync --frozen
       - run: uv run ruff check .
-      - run: uv run format --check
+      - run: uv run ruff format --check .
       #  CLI : uv add --dev pytest httpx
       # - run: uv run pytest
