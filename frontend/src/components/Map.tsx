@@ -6,7 +6,7 @@ import type { FeatureCollection, Feature } from 'geojson'
 import type { Area } from '../types.ts'
 import type { PrixData } from '../types.ts'
 
-function getColor(prix: number | undefined): string {
+export function getColor(prix: number | undefined): string {
     if (prix === undefined) return '#cccccc'  // gris = pas de données
     if (prix > 12000) return '#800026'
     if (prix > 9000) return '#BD0026'
@@ -15,7 +15,7 @@ function getColor(prix: number | undefined): string {
     return '#FD8D3C'
 }
 
-function getPrixCommunes(prixData: PrixData[] | null): Record<string, number> {
+export function getPrixCommunes(prixData: PrixData[] | null): Record<string, number> {
     const prixCommunes: Record<string, number> = {}
     if (prixData) {
         for (const row of prixData) {
