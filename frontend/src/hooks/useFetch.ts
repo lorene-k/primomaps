@@ -1,21 +1,36 @@
 import { useState, useEffect } from 'react'
 
+interface FetchState<T> {
+    data: T | null
+    loading: boolean
+    error: string | null
+}
+
 export function useFetch<T>(url: string) {
-    const [data, setData] = useState<T | null>(null)
-    const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string | null>(null)
+    const [state, setState] = useState<FetchState<T>>({
+        data: null,
+        loading: true,
+        error: null,
+    })
 
     useEffect(() => {
-        setLoading(true);
-        fetch(url)
-            .then((res) => {
-                if (!res.ok) throw new Error(`HTTP ${res.status}`)
-                return res.json()
-            })
-            .then((json) => setData(json))
-            .catch((err) => setError(err.message))
-            .finally(() => setLoading(false))
+        let cancelled = false
+
+        async function fetchData() {
+            try {
+                const res = await fetch(url)
+                if (!res.ok) throw new Error(`HTTP : ${res.status}`)
+                const json = await res.json()
+                if (!cancelled) setState({ data: json, loading: false, error: null })
+            } catch (err) {
+                if (!cancelled) setState({ data: null, loading: false, error: (err as Error).message })
+            }
+        }
+
+        fetchData()
+        return () => { cancelled = true }
+
     }, [url])
 
-    return { data, loading, error }
+    return { data: state.data, loading: state.loading, error: state.error }
 }
