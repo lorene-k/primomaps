@@ -1,5 +1,6 @@
 from app.database import get_pool
 
+
 async def get_prix_communes(type_local: str | None = None):
     pool = get_pool()
     async with pool.acquire() as conn:

@@ -1,11 +1,12 @@
-from fastapi import FastAPI
-from contextlib import asynccontextmanager
-from app.database import init_db, close_db
-from app.queries import get_prix_communes
-from app.models import PrixCommune
-from fastapi.middleware.cors import CORSMiddleware
 import os
+from contextlib import asynccontextmanager
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.database import close_db, init_db
+from app.models import PrixCommune
+from app.queries import get_prix_communes
 
 origins = os.getenv("CORS_ORIGIN")
 
