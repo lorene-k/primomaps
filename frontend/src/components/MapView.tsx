@@ -29,7 +29,7 @@ export function MapView() {
         return <div>Erreur : {geoError || prixError}</div>;
 
     return (
-        <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+        <div className="flex min-h-0 flex-1 flex-col gap-4 lg:flex-row">
             <aside className="w-full shrink-0 lg:w-1/3 lg:max-w-sm">
                 <Panel
                     area={selectedArea}
@@ -41,8 +41,8 @@ export function MapView() {
                 />
             </aside>
 
-            <main className="flex flex-col flex-1 gap-4">
-                <div className="lg:h-full rounded-md overflow-hidden">
+            <main className="flex flex-1 flex-col gap-4">
+                <div className="overflow-hidden rounded-md lg:h-full">
                     <Map
                         onAreaClick={setSelectedArea}
                         selectedArea={selectedArea}

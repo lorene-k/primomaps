@@ -2,8 +2,8 @@ import { MapView } from "./components/MapView.tsx";
 
 function App() {
     return (
-        <div className="h-screen text-slate-100 p-6">
-            <div className="h-full flex flex-col gap-6">
+        <div className="h-screen p-6 text-slate-100">
+            <div className="flex h-full flex-col gap-6">
                 <header>
                     <h1 className="text-2xl font-bold">PRIMOMAPS</h1>
                     <p className="text-sm text-slate-400">
@@ -13,7 +13,7 @@ function App() {
 
                 <MapView />
 
-                <footer className="shrink-0 flex justify-between text-xs mt-5 text-slate-600">
+                <footer className="mt-5 flex shrink-0 justify-between text-xs text-slate-600">
                     <span>Données DVF Etalab 2025</span>
                     <span>
                         Site réalisé par{" "}

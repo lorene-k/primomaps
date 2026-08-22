@@ -27,19 +27,19 @@ export function Filter({
                 onFilterChange(v === "Tout" ? null : v)
             }
         >
-            <SelectTrigger className="w-full p-4 rounded-md h-full border border-slate-400">
+            <SelectTrigger className="h-full w-full rounded-md border border-slate-400 p-4">
                 <SelectValue placeholder="Type de bien" />
             </SelectTrigger>
             <SelectContent
                 alignItemWithTrigger={false}
-                className="bg-slate-200/20 backdrop-blur-md text-slate-100 "
+                className="bg-slate-200/20 text-slate-100 backdrop-blur-md"
             >
                 <SelectGroup>
                     {items.map((item) => (
                         <SelectItem
                             key={item.value}
                             value={item.value}
-                            className="focus:text-slate-100 focus:bg-slate-200/20 transition-colors duration-200"
+                            className="transition-colors duration-200 focus:bg-slate-200/20 focus:text-slate-100"
                         >
                             {item.label}
                         </SelectItem>

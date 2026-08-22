@@ -9,11 +9,11 @@ const PRICE_COLORS = {
 export function MapLegend() {
     return (
         <div className="bottom-4 rounded shadow">
-            <div className="flex flex-row lg:flex-row gap-4">
+            <div className="flex flex-col gap-1 md:flex-row md:gap-4 lg:flex-row lg:text-xl">
                 {Object.entries(PRICE_COLORS).map(([range, color]) => (
                     <div key={range} className="flex items-center gap-2">
                         <div
-                            className="w-4 h-4 rounded"
+                            className="h-4 w-4 rounded"
                             style={{ backgroundColor: color }}
                         ></div>
                         <span className="text-sm">{range} €/m²</span>

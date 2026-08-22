@@ -29,13 +29,13 @@ export function Panel({
                     <LoaderCircle className="animate-spin text-slate-400" />
                 </div>
             ) : !infoArea || !area ? (
-                <p className="text-slate-400 flex flex-col mt-10">
+                <p className="mt-10 flex flex-col text-slate-400">
                     Cliquez sur une commune pour voir les infos →
                 </p>
             ) : (
-                <div className="mt-5 p-4 rounded-md shadow-md h-full border border-slate-400">
+                <div className="mt-5 h-full rounded-md border border-slate-400 p-4 shadow-md">
                     <h2 className="text-xl font-bold">{area.nom}</h2>
-                    <p className="font-light mb-3">{area.code}</p>
+                    <p className="mb-3 font-light">{area.code}</p>
                     <p>
                         Prix médian : {Math.round(infoArea.prix_median_m2)} €/m²
                     </p>
