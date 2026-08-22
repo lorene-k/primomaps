@@ -41,5 +41,3 @@ def health():
 async def communes(type: str | None = None):
     rows = await get_prix_communes(type)
     return rows
-
-#test
