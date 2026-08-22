@@ -3,10 +3,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.config import settings
 from app.database import close_db, init_db
 from app.models import PrixCommune
 from app.queries import get_prix_communes
-from app.config import settings
 
 
 @asynccontextmanager
