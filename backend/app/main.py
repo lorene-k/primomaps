@@ -1,4 +1,3 @@
-import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -7,10 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import close_db, init_db
 from app.models import PrixCommune
 from app.queries import get_prix_communes
-
-origins = os.getenv("CORS_ORIGIN")
-if origins is None:
-    raise RuntimeError("CORS_ORIGIN environment variable is required")
+from app.config import settings
 
 
 @asynccontextmanager
@@ -25,7 +21,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origins],
+    allow_origins=[settings.cors_origin],
     allow_methods=["*"],
     allow_headers=["*"],
 )

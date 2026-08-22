@@ -1,11 +1,11 @@
-import os
-
 import asyncpg
 from dotenv import load_dotenv
 
+from app.config import settings
+
 load_dotenv()
 
-db_url = os.getenv("SUPABASE_URL")
+db_url = settings.supabase_url
 _pool = None
 
 
