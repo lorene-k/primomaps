@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getColor, getPrixCommunes } from "../src/components/Map";
+import { getColor, getPrixCommunes } from "../src/utils";
 import type { PrixData } from "../src/types";
 
 describe("getColor", () => {
