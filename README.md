@@ -21,9 +21,9 @@ An interactive map showing the median real-estate price per square meter by comm
 
 ## Prerequisites
 
-- Node.js and npm
-- Python 3.12 and [uv](https://docs.astral.sh/uv/)
-- A Supabase project (Postgres database)
+- Node.js & npm
+- Python 3.12 & uv
+- A Supabase project (Postgres DB)
 
 ## Installation
 
@@ -38,8 +38,8 @@ This runs `npm install` in `frontend/` and `uv sync --frozen` in `backend/`.
 Apply the Supabase migrations in `supabase/` to create the `transactions` table, then load the DVF dataset:
 
 ```bash
-cd data
-python load_dvf.py
+cd backend
+uv run python load_dvf.py
 ```
 
 This cleans `92.csv` and bulk-loads it into the `transactions` table.
