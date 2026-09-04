@@ -69,4 +69,4 @@ make dev
 
 Runs the frontend (Vite dev server) and backend (`fastapi dev`) concurrently.
 
-Other useful targets: `make test`, `make format`, `make lint-check`, `make check`.
+Other useful targets: `make test`, `make format`, `make check`
