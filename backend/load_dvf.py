@@ -1,10 +1,10 @@
-import os
-import csv
-import asyncpg
 import asyncio
-from dotenv import load_dotenv
+import csv
+import os
 from decimal import Decimal, InvalidOperation
 
+import asyncpg
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -15,12 +15,12 @@ def clean_numeric_value(value: str):
     try:
         return Decimal(value)
     except (ValueError, TypeError, InvalidOperation):
-        return None # TODO - Track invalid values
+        return None  # TODO - Track invalid values
 
 
 def load_csv(file_path: str):
     records = []
-    with open(file_path, mode='r', encoding='utf-8', newline='') as csvfile:
+    with open(file_path, mode="r", encoding="utf-8", newline="") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             record = (
@@ -31,7 +31,7 @@ def load_csv(file_path: str):
                 row["code_commune"],
                 row["code_commune"],
                 clean_numeric_value(row["longitude"]),
-                clean_numeric_value(row["latitude"])
+                clean_numeric_value(row["latitude"]),
             )
             records.append(record)
     return records
@@ -54,8 +54,8 @@ async def csv_to_db():
                     "nature_mutation",
                     "code_commune",
                     "longitude",
-                    "latitude"
-                ]
+                    "latitude",
+                ],
             )
             await conn.execute("""
                 UPDATE transactions
@@ -69,4 +69,3 @@ async def csv_to_db():
 
 if __name__ == "__main__":
     asyncio.run(csv_to_db())
-
