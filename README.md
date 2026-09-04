@@ -4,6 +4,8 @@ An interactive map showing the median real-estate price per square meter by comm
 
 → [Live demo](https://primomaps.vercel.app/)
 
+> Note: the API is hosted on Render's free tier -> the first request after inactivity may take 30-60s to respond while the backend spins up
+
 ## Tech Stack
 
 | Layer | Tech |
